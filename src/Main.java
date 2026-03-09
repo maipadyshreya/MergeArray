@@ -1,6 +1,13 @@
+/******************************************************************************
+ @author Group MW 07 SP26
+ Abdullah Ahmed, Tanequa Bailey, Shreya Maipady, and Jose Quevedo
+ CMPE 187
+ Professor Ishie Eswar
+ March 14/2026
+ Data Flow
+ This program merges 2 sorted arrays.
+ *******************************************************************************/
 import java.util.Scanner;
-
-
 public class Main {
     //method to merge arrays
     public static int[] mergeArrays(int[] arrayA, int[] arrayB) {
@@ -45,54 +52,71 @@ public class Main {
     public static void main(String[] args) {
         //User Input
         Scanner sc = new Scanner(System.in);
-        //Array A input
-        System.out.println("Enter Array A");
-        String inputArrA = sc.nextLine();
-        //Remove the brackets
-        inputArrA = inputArrA.replace("[", "").replace("]", "");
-        //split with the delimeter
-        String[] strArrayA = inputArrA.split(",");
-        int counterA = 0;
-        int arrayA[] = new int[strArrayA.length];
-        for (String s : strArrayA) {
-            int integerForA = Integer.parseInt(s.trim());
-            arrayA[counterA] = integerForA;
-            counterA++;
-        }
 
+        int arrayA[] = null;
+        boolean incorrectA = true;
+        int arrayB[] = null;
+        boolean incorrectB = true;
+        //Array A input
+        while (incorrectA) {
+            incorrectA = false;
+            System.out.println("Enter Array A(eg:[x, x, x])");
+            String inputArrA = sc.nextLine();
+            //Remove the brackets
+            inputArrA = inputArrA.replace("[", "").replace("]", "");
+            //split with the delimeter
+            String[] strArrayA = inputArrA.split(",");
+            int counterA = 0;
+            arrayA = new int[strArrayA.length];
+            try {
+                for (String s : strArrayA) {
+                    int integerForA = Integer.parseInt(s.trim());
+                    arrayA[counterA] = integerForA;
+                    counterA++;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid format");
+                incorrectA = true;
+            }
+
+        }
 
         //Array B input
-        System.out.println("Enter Array B");
-        String inputArrB = sc.nextLine();
-        inputArrB = inputArrB.replace("[", "").replace("]", "");
+        while (incorrectB) {
+            incorrectB = false;
+            System.out.println("Enter Array B (eg:[x, x, x])");
+            String inputArrB = sc.nextLine();
+            inputArrB = inputArrB.replace("[", "").replace("]", "");
 
+            //split with the delimeter
+            String[] strArrayB = inputArrB.split(",");
 
-        //split with the delimeter
-        String[] strArrayB = inputArrB.split(",");
-
-
-
-
-        int counterB = 0;
-        int arrayB[] = new int[strArrayB.length];
-        for (String s : strArrayB) {
-            int integerForB = Integer.parseInt(s.trim());
-            arrayB[counterB] = integerForB;
-            counterB++;
-        }
-
-
-        //call merge method
-        int finalArray[] = mergeArrays(arrayA, arrayB);
-        System.out.print("[ ");
-        for (int i = 0; i < finalArray.length; i++) {
-            System.out.print(finalArray[i]);
-            if (i != finalArray.length - 1) {
-                System.out.print(", ");
+            int counterB = 0;
+            arrayB = new int[strArrayB.length];
+            try {
+                for (String s : strArrayB) {
+                    int integerForB = Integer.parseInt(s.trim());
+                    arrayB[counterB] = integerForB;
+                    counterB++;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid format");
+                incorrectB = true;
             }
-        }
-        System.out.print("]");
 
+        }
+            //call merge method
+            int finalArray[] = mergeArrays(arrayA, arrayB);
+            System.out.print("[ ");
+            for (int i = 0; i < finalArray.length; i++) {
+                System.out.print(finalArray[i]);
+                if (i != finalArray.length - 1) {
+                    System.out.print(", ");
+                }
+            }
+            System.out.print("]");
+
+        }
     }
-}
+
 
